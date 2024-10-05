@@ -35,7 +35,54 @@ Se debe asegurar que los montos ingresados en las transacciones sean positivos.
 4. Gestión de Datos:
 Guardar y cargar los datos (clientes, cuentas, y transacciones) en un archivo de texto o CSV para que la información persista entre sesiones.
 """
+#----------------------------------------------------------------------------------
+import os
+cliente = []
+personas = {"nombre": None,
+            "apellido": None,
+            "id": None,
+            "telefono": None}
 
+cuentaCorriente = {"numero": None,
+                   "saldo": None,
+                   "tipo": None,
+                   "idCliente": None,
+                   "limiteSobregiro": 100000000,
+                   "saldoMinimo": 1000000}
+
+#Funcion para guardar el nombre, apellido, id, telefono de un cliente en un diccionario
+def abrirCuenta():
+    while True:
+        consola1 = input("ingrese su nombre: ")
+        consola2 = input("ingrese su apellido: ")
+        consola3 = int(input("ingrese su id: "))
+        consola4 = int(input("Ingrese su telefono: "))
+        personas["nombre"] = consola1
+        personas["apellido"] = consola2
+        personas["id"] = consola3
+        personas["telefono"] = consola4
+        cliente.append(personas)
+        return cliente
+#values
+
+#Cuenta Corriente
+#def corriente(numeroCuenta):
+
+
+#funcion para definir el tipo de cuenta
+
+#buscar cliente
+def buscar():
+    consola = int(input("Ingrese su Id: "))
+    for consola in cliente:
+        if consola == id.values():
+            print(cliente)
+        else:
+            print("Nada")
+    
+
+
+#====================================================================
 while True:
     print("=================================")
     print("        Bienvenido al Banco      ")
@@ -52,13 +99,8 @@ while True:
         "8. Salir \n")
     opcion = int(input())
 
-    if opcion == 7:
-        break
-
-#Funcion para guardar el nombre, apellido, id, telefono de un cliente en un diccionario
-def abrirCuenta():
-    abrirCuenta = {}
-    while True:
-        nombreConsola = input("Ingrese su Nombre: ")
-        abrirCuenta[nombre] = nombreConsola 
-
+    if opcion == 1:
+        abrirCuenta()
+    elif opcion == 7:
+        buscar()
+        
