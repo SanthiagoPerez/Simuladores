@@ -36,8 +36,14 @@ Se debe asegurar que los montos ingresados en las transacciones sean positivos.
 Guardar y cargar los datos (clientes, cuentas, y transacciones) en un archivo de texto o CSV para que la información persista entre sesiones.
 """
 #----------------------------------------------------------------------------------
+
+from random import *
 import os
+
 cliente = []
+corriente = []
+ahorro = []
+
 personas = {"nombre": None,
             "apellido": None,
             "id": None,
@@ -50,57 +56,99 @@ cuentaCorriente = {"numero": None,
                    "limiteSobregiro": 100000000,
                    "saldoMinimo": 1000000}
 
+cuentaAhorro = {"numero": None,
+                "saldo": None,
+                "tipo": None,
+                "idCliente": None,
+                "saldoMinimo": 50000}
+
 #Funcion para guardar el nombre, apellido, id, telefono de un cliente en un diccionario
 def abrirCuenta():
-    while True:
-        consola1 = input("ingrese su nombre: ")
-        consola2 = input("ingrese su apellido: ")
-        consola3 = int(input("ingrese su id: "))
-        consola4 = int(input("Ingrese su telefono: "))
-        personas["nombre"] = consola1
-        personas["apellido"] = consola2
-        personas["id"] = consola3
-        personas["telefono"] = consola4
-        cliente.append(personas)
-        return cliente
-#values
+    consola1 = input("ingrese su nombre: ")
+    consola2 = input("ingrese su apellido: ")
+    consola3 = int(input("ingrese su id: "))
+    consola4 = int(input("Ingrese su telefono: "))
+    personas["nombre"] = consola1
+    personas["apellido"] = consola2
+    personas["id"] = consola3
+    personas["telefono"] = consola4
+    cliente.append(personas)
+    menu()
 
-#Cuenta Corriente
-#def corriente(numeroCuenta):
+#Funcion para definir Cuenta Corriente
+def abrirCorriente():
+    consola1 = int(input("Ingrese su Dinero: "))
+    consola2 = int(input("Ingrese su Identificacion: "))
+    cuentaCorriente["numero"] = randint(100, 10000)
+    cuentaCorriente["saldo"] = consola1
+    cuentaCorriente["idCliente"] = consola2
+    corriente.append(cuentaCorriente)
+    os.system("cls")
+    menu()
 
+#Funcion para definir cuenta Ahorros
+def abrirAhorros():
+    consola1 = int(input("Ingrese su Dinero: "))
+    consola2 = int(input("Ingrese su Identificacion: "))
+    cuentaAhorro["numero"] = randint(10001, 100000)
+    cuentaAhorro["saldo"] = consola1
+    cuentaAhorro["idCliente"] = consola2
+    ahorro.append(cuentaAhorro)
+    menu()
 
-#funcion para definir el tipo de cuenta
+#funcion para seleccionar la cuenta a depositar
+def seleccionarDeposito():
+    print("========================")
+    print("  SELECCIONE SU CUENTA  ")
+    print("1. Cuenta Corriente \n"
+          "2. Cuenta Ahorros \n")
+    consola = int(input("Ingrese el numero de la opcion: "))
+
+    if consola == 1:
+        abrirCorriente()
+    elif consola == 2:
+        abrirAhorros()
+    else:
+        print("Opcion erronea, Intente nuevamente")
+    os.system("cls")
+    menu()
 
 #buscar cliente
 def buscar():
-    consola = int(input("Ingrese su Id: "))
-    for consola in cliente:
-        if consola == id.values():
-            print(cliente)
-        else:
-            print("Nada")
-    
-
+    consola = input(int("Ingrese el Identificador"))
+    for buscador in cliente:
+        if consola == buscador["id"]:
+            print(buscador)
+    if not buscador:
+            print("Cliente NO Registrado")
+    os.system("cls")
+    menu() 
 
 #====================================================================
-while True:
-    print("=================================")
-    print("        Bienvenido al Banco      ")
-    print("=================================")
-    print()
-    print("--- SELECCIONE UNA OPCION --- \n"
-        "1. Abrir Cuenta \n"
-        "2. Depositar Dinero \n"
-        "3. Retirar Dinero \n"
-        "4. Transfesir Dinero entre Cuentas \n"
-        "5. Consultar Saldo \n"
-        "6. Ver Historial de Transacciones \n"
-        "7. Buscar Cliente \n"
-        "8. Salir \n")
-    opcion = int(input())
+def menu():
+    while True:
+        print("=================================")
+        print("        Bienvenido al Banco      ")
+        print("=================================")
+        print()
+        print("--- SELECCIONE UNA OPCION --- \n"
+            "1. Abrir Cuenta \n"
+            "2. Depositar Dinero \n"
+            "3. Retirar Dinero \n"
+            "4. Transfesir Dinero entre Cuentas \n"
+            "5. Consultar Saldo \n"
+            "6. Ver Historial de Transacciones \n"
+            "7. Buscar Cliente \n"
+            "8. Salir \n")
+        opcion = int(input("Ingrese la opcion: "))
+        os.system("cls")
 
-    if opcion == 1:
-        abrirCuenta()
-    elif opcion == 7:
-        buscar()
-        
+        if opcion == 1:
+            abrirCuenta()
+        elif opcion == 2:
+            depositar()
+        elif opcion == 7:
+            buscar()
+
+print(menu())       
+#======================================================================
